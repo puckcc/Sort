@@ -16,11 +16,11 @@
 typedef int Status; 
 
 
-#define MAXSIZE 10000  /* 用于要排序数组个数最大值，可根据需要修改 */
+#define MAXSIZE 10000            /* 用于要排序数组个数最大值，可根据需要修改 */
 typedef struct
 {
-	int r[MAXSIZE+1];	/* 用于存储要排序数组，r[0]用作哨兵或临时变量 */
-	int length;			/* 用于记录顺序表的长度 */
+	int r[MAXSIZE+1];	         /* 用于存储要排序数组，r[0]用作哨兵或临时变量 */
+	int length;			         /* 用于记录顺序表的长度 */
 }SqList;
 
 /* 交换L中数组r的下标为i和j的值 */
@@ -50,7 +50,7 @@ void BubbleSort0(SqList *L)
 		{
 			if(L->r[i]>L->r[j])
 			{
-				 swap(L,i,j);/* 交换L->r[i]与L->r[j]的值 */
+				 swap(L,i,j);        /* 交换L->r[i]与L->r[j]的值 */
 			}
 		}
 	}
@@ -64,9 +64,9 @@ void BubbleSort(SqList *L)
 	{
 		for(j=L->length-1;j>=i;j--)  /* 注意j是从后往前循环 */
 		{
-			if(L->r[j]>L->r[j+1]) /* 若前者大于后者（注意这里与上一算法的差异）*/
+			if(L->r[j]>L->r[j+1])    /* 若前者大于后者（注意这里与上一算法的差异）*/
 			{
-				 swap(L,j,j+1);/* 交换L->r[j]与L->r[j+1]的值 */
+				 swap(L,j,j+1);      /* 交换L->r[j]与L->r[j+1]的值 */
 			}
 		}
 	}
@@ -76,16 +76,16 @@ void BubbleSort(SqList *L)
 void BubbleSort2(SqList *L)
 { 
 	int i,j;
-	Status flag=TRUE;			/* flag用来作为标记 */
+	Status flag=TRUE;			     /* flag用来作为标记 */
 	for(i=1;i<L->length && flag;i++) /* 若flag为true说明有过数据交换，否则停止循环 */
 	{
-		flag=FALSE;				/* 初始为False */
+		flag=FALSE;				     /* 初始为False */
 		for(j=L->length-1;j>=i;j--)
 		{
 			if(L->r[j]>L->r[j+1])
 			{
-				 swap(L,j,j+1);	/* 交换L->r[j]与L->r[j+1]的值 */
-				 flag=TRUE;		/* 如果有数据交换，则flag为true */
+				 swap(L,j,j+1);	     /* 交换L->r[j]与L->r[j+1]的值 */
+				 flag=TRUE;		     /* 如果有数据交换，则flag为true */
 			}
 		}
 	}
@@ -99,9 +99,9 @@ void SelectSort(SqList *L)
 	for(i=1;i<L->length;i++)
 	{ 
 		min = i;						/* 将当前下标定义为最小值下标 */
-		for (j = i+1;j<=L->length;j++)/* 循环之后的数据 */
+		for (j = i+1;j<=L->length;j++)  /* 循环之后的数据 */
         {
-			if (L->r[min]>L->r[j])	/* 如果有小于当前最小值的关键字 */
+			if (L->r[min]>L->r[j])	    /* 如果有小于当前最小值的关键字 */
                 min = j;				/* 将此关键字的下标赋值给min */
         }
 		if(i!=min)						/* 若min不等于i，说明找到最小值，交换 */
@@ -115,12 +115,12 @@ void InsertSort(SqList *L)
 	int i,j;
 	for(i=2;i<=L->length;i++)
 	{
-		if (L->r[i]<L->r[i-1]) /* 需将L->r[i]插入有序子表 */
+		if (L->r[i]<L->r[i-1])      /* 需将L->r[i]插入有序子表 */
 		{
-			L->r[0]=L->r[i]; /* 设置哨兵 */
+			L->r[0]=L->r[i];        /* 设置哨兵 */
 			for(j=i-1;L->r[j]>L->r[0];j--)
-				L->r[j+1]=L->r[j]; /* 记录后移 */
-			L->r[j+1]=L->r[0]; /* 插入到正确位置 */
+				L->r[j+1]=L->r[j];  /* 记录后移 */
+			L->r[j+1]=L->r[0];      /* 插入到正确位置 */
 		}
 	}
 }
@@ -132,15 +132,15 @@ void ShellSort(SqList *L)
 	int increment=L->length;
 	do
 	{
-		increment=increment/3+1;/* 增量序列 */
+		increment=increment/3+1;               /* 增量序列 */
 		for(i=increment+1;i<=L->length;i++)
 		{
-			if (L->r[i]<L->r[i-increment])/*  需将L->r[i]插入有序增量子表 */ 
+			if (L->r[i]<L->r[i-increment])     /*  需将L->r[i]插入有序增量子表 */ 
 			{ 
-				L->r[0]=L->r[i]; /*  暂存在L->r[0] */
+				L->r[0]=L->r[i];               /*  暂存在L->r[0] */
 				for(j=i-increment;j>0 && L->r[0]<L->r[j];j-=increment)
 					L->r[j+increment]=L->r[j]; /*  记录后移，查找插入位置 */
-				L->r[j+increment]=L->r[0]; /*  插入 */
+				L->r[j+increment]=L->r[0];     /*  插入 */
 			}
 		}
 		printf("	第%d趟排序结果: ",++k);
@@ -162,13 +162,13 @@ void HeapAdjust(SqList *L,int s,int m)
 	for(j=2*s;j<=m;j*=2) /* 沿关键字较大的孩子结点向下筛选 */
 	{
 		if(j<m && L->r[j]<L->r[j+1])
-			++j; /* j为关键字中较大的记录的下标 */
+			++j;         /* j为关键字中较大的记录的下标 */
 		if(temp>=L->r[j])
-			break; /* rc应插入在位置s上 */
+			break;       /* rc应插入在位置s上 */
 		L->r[s]=L->r[j];
 		s=j;
 	}
-	L->r[s]=temp; /* 插入 */
+	L->r[s]=temp;        /* 插入 */
 }
 
 /*  对顺序表L进行堆排序 */
@@ -180,8 +180,8 @@ void HeapSort(SqList *L)
 
 	for(i=L->length;i>1;i--)
 	{ 
-		 swap(L,1,i); /* 将堆顶记录和当前未经排序子序列的最后一个记录交换 */
-		 HeapAdjust(L,1,i-1); /*  将L->r[1..i-1]重新调整为大根堆 */
+		 swap(L,1,i);          /* 将堆顶记录和当前未经排序子序列的最后一个记录交换 */
+		 HeapAdjust(L,1,i-1);  /*  将L->r[1..i-1]重新调整为大根堆 */
 	}
 }
 
@@ -250,7 +250,7 @@ void MergePass(int SR[],int TR[],int s,int n)
 	}
 	if(i<n-s+1) /* 归并最后两个序列 */
 		Merge(SR,TR,i,i+s-1,n);
-	else /* 若最后只剩下单个子序列 */
+	else        /* 若最后只剩下单个子序列 */
 		for(j =i;j <= n;j++)
 			TR[j] = SR[j];
 }
@@ -280,7 +280,7 @@ int Partition(SqList *L,int low,int high)
 	int pivotkey;
 
 	pivotkey=L->r[low]; /* 用子表的第一个记录作枢轴记录 */
-	while(low<high) /*  从表的两端交替地向中间扫描 */
+	while(low<high)     /*  从表的两端交替地向中间扫描 */
 	{ 
 		 while(low<high&&L->r[high]>=pivotkey)
 			high--;
@@ -299,8 +299,8 @@ void QSort(SqList *L,int low,int high)
 	if(low<high)
 	{
 			pivot=Partition(L,low,high); /*  将L->r[low..high]一分为二，算出枢轴值pivot */
-			QSort(L,low,pivot-1);		/*  对低子表递归排序 */
-			QSort(L,pivot+1,high);		/*  对高子表递归排序 */
+			QSort(L,low,pivot-1);		 /*  对低子表递归排序 */
+			QSort(L,pivot+1,high);		 /*  对高子表递归排序 */
 	}
 }
 
@@ -328,8 +328,8 @@ int Partition1(SqList *L,int low,int high)
 		swap(L,m,low);		/* 交换中间与左端数据，保证左端较小 */
 	
 	pivotkey=L->r[low]; /* 用子表的第一个记录作枢轴记录 */
-	L->r[0]=pivotkey;  /* 将枢轴关键字备份到L->r[0] */
-	while(low<high) /*  从表的两端交替地向中间扫描 */
+	L->r[0]=pivotkey;   /* 将枢轴关键字备份到L->r[0]   */
+	while(low<high)     /* 从表的两端交替地向中间扫描 */
 	{ 
 		 while(low<high&&L->r[high]>=pivotkey)
 			high--;
@@ -350,9 +350,9 @@ void QSort1(SqList *L,int low,int high)
 		while(low<high)
 		{
 			pivot=Partition1(L,low,high); /*  将L->r[low..high]一分为二，算出枢轴值pivot */
-			QSort1(L,low,pivot-1);		/*  对低子表递归排序 */
-			/* QSort(L,pivot+1,high);		/*  对高子表递归排序 */
-			low=pivot+1;	/* 尾递归 */
+			QSort1(L,low,pivot-1);		  /*  对低子表递归排序 */
+			/* QSort(L,pivot+1,high);	  /*  对高子表递归排序 */
+			low=pivot+1;	    /* 尾递归 */
 		}
 	}
 	else
