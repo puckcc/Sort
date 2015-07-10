@@ -15,12 +15,11 @@
 
 typedef int Status; 
 
-
 #define MAXSIZE 10000            /* 用于要排序数组个数最大值，可根据需要修改 */
 typedef struct
 {
 	int r[MAXSIZE+1];	         /* 用于存储要排序数组，r[0]用作哨兵或临时变量 */
-	int length;			         /* 用于记录顺序表的长度 */
+	int length;			         /* 用于记录+顺序表的长度 */
 }SqList;
 
 /* 交换L中数组r的下标为i和j的值 */
